@@ -12,5 +12,5 @@ Feature: Update Booking API
     And I set booking data with firstname "Updated" and lastname "Name"
     When I send PUT request to "/booking/{id}" with booking ID
     Then response status code should be 200
-#    And put response should contain firstname "Updated"
-#    And put response should contain lastname "Name"
+    And put response should contain firstname "Updated"
+    And put response should contain lastname "Name"
