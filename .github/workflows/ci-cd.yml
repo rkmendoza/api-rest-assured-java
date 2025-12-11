@@ -1,0 +1,14 @@
+- name: Run Java API Tests
+  run: |
+    cd java-api-automation
+    mvn clean test
+    mvn allure:report
+
+- name: Upload Java Test Reports
+  uses: actions/upload-artifact@v3
+  with:
+    name: java-test-reports
+    path: |
+      java-api-automation/target/cucumber-reports/
+      java-api-automation/target/allure-report/
+    retention-days: 30
