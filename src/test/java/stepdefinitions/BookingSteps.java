@@ -32,6 +32,7 @@ public class BookingSteps {
     @Given("I set base URL for RESTful Booker API")
     public void setBaseUrl() {
         // Base URL ya está configurada en RequestBuilder
+        System.out.println("console log para pruebas de action");
     }
 
 
