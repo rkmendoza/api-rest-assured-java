@@ -25,14 +25,12 @@ jobs:
 
       - name: Run tests with Maven
         run: |
-          cd java-api-automation
           mvn clean test
         env:
           ENVIRONMENT: test
 
       - name: Generate Allure Report
         run: |
-          cd java-api-automation
           mvn allure:report
 
       - name: Upload Test Reports
@@ -40,8 +38,8 @@ jobs:
         with:
           name: test-reports
           path: |
-            java-api-automation/target/cucumber-reports/
-            java-api-automation/target/allure-report/
+            api-rest-assured-java/target/cucumber-reports/
+            api-rest-assured-java/target/allure-report/
           retention-days: 30
 
   sonarcloud:
@@ -60,11 +58,11 @@ jobs:
         with:
           java-version: '8'
 
-      - name: Run SonarCloud analysis
-        run: |
-          cd java-api-automation
-          mvn clean verify sonar:sonar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # yamllint disable-line rule:new-line-at-end-of-file
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: Run SonarCloud analysis
+#        run: |
+#          mvn clean verify sonar:sonar
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          # yamllint disable-line rule:new-line-at-end-of-file
+# yamllint disable-line rule:new-line-at-end-of-file
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
