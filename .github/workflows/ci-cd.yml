@@ -1,4 +1,4 @@
-name: Java API Tests CI/CD
+name: Java 11 API Tests CI/CD
 
 on:
   push:
