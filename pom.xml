@@ -24,6 +24,15 @@
         <allure.version>2.24.0</allure.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
 <!--        <aspectj.version>1.9.20</aspectj.version>-->
+
+        <!-- SonarCloud properties -->
+        <sonar.organization>rkmendoza</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>rkmendoza_api-rest-assured-java</sonar.projectKey>
+
+        <!-- JaCoCo for coverage -->
+        <jacoco.version>0.8.12</jacoco.version>
+
     </properties>
 
     <dependencies>
@@ -106,6 +115,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- JaCoCo for code coverage -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -158,6 +175,36 @@
                     <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo Plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Sonar Maven Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+
         </plugins>
     </build>
 </project>
