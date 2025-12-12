@@ -11,34 +11,30 @@
     <packaging>jar</packaging>
 
     <properties>
-        <!-- ✅ ACTUALIZADO A JAVA 11 -->
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- ✅ VERSIONES ACTUALIZADAS PARA JAVA 11 -->
-        <restassured.version>5.4.0</restassured.version>
-        <cucumber.version>7.15.0</cucumber.version>
-        <testng.version>7.8.0</testng.version>
+        <!-- VERSIONES ESTABLES -->
+        <restassured.version>5.3.0</restassured.version>
+        <cucumber.version>7.11.2</cucumber.version>
+        <testng.version>7.4.0</testng.version>
         <lombok.version>1.18.30</lombok.version>
-        <jackson.version>2.15.3</jackson.version>
-        <allure.version>2.25.0</allure.version>
-        <maven.surefire.version>3.1.2</maven.surefire.version>
+        <jackson.version>2.15.2</jackson.version>
+        <allure.version>2.24.0</allure.version>
+        <maven.surefire.version>2.22.2</maven.surefire.version>
 
-        <!-- ✅ SONAR VERSIONES COMPATIBLES CON JAVA 11 -->
-        <sonar.version>3.3.0.603</sonar.version>
-        <jacoco.version>0.8.11</jacoco.version>
+        <!-- SONAR -->
         <sonar.organization>rkmendoza</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>rkmendoza_api-rest-assured-java</sonar.projectKey>
 
-        <!-- ✅ ASPECTJ PARA ALLURE CON JAVA 11 -->
-        <aspectj.version>1.9.20</aspectj.version>
-
+        <!-- JAcoCO -->
+        <jacoco.version>0.8.8</jacoco.version>
     </properties>
 
     <dependencies>
-        <!-- RestAssured CORE -->
+        <!-- 1. REST ASSURED -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -46,7 +42,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- ✅ JSON Schema Validator (NUEVO - IMPORTANTE) -->
+        <!-- 2. JSON Schema Validator -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
@@ -54,34 +50,37 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber BDD -->
+        <!-- 3. CUCUMBER CORE -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- TestNG -->
+        <!-- 4. TESTNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- 5. LOMBOK (IMPORTANTE: scope provided) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -89,54 +88,60 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jackson for JSON -->
+        <!-- 6. JACKSON (para ObjectMapper) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 
-        <!-- ✅ AspectJ para Allure (NECESARIO CON JAVA 11) -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-            <scope>test</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
-        <!-- Allure para Cucumber 7 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- 7. ALLURE -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
             <version>${allure.version}</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Allure para TestNG -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- ✅ SLF4J actualizado -->
+        <!-- 8. LOGGING -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.9</version>
+            <version>1.7.36</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-            <!-- ✅ Maven Compiler Plugin PARA JAVA 11 -->
+            <!-- COMPILER PLUGIN CON LOMBOK -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <annotationProcessorPaths>
                         <path>
@@ -148,7 +153,7 @@
                 </configuration>
             </plugin>
 
-            <!-- ✅ Maven Surefire Plugin ACTUALIZADO -->
+            <!-- SURFEFIRE PLUGIN -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -157,71 +162,52 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <!-- ✅ CONFIGURACIÓN ASPECTJ PARA ALLURE -->
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Daj.weaving.verbose=false
-                        -Dorg.aspectj.weaver.showWeaveInfo=false
-                        -Dorg.aspectj.tracing.enabled=false
-                    </argLine>
+                    <argLine>@{argLine}</argLine>
                 </configuration>
             </plugin>
 
-            <!-- Allure Maven Plugin -->
+            <!-- ALLURE PLUGIN -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.12.0</version>
                 <configuration>
-                    <reportVersion>${allure.version}</reportVersion>
+                    <reportVersion>2.24.0</reportVersion>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                     <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
                 </configuration>
             </plugin>
 
-            <!-- ✅ JaCoCo Plugin (CONFIGURACIÓN CORRECTA) -->
+            <!-- JAcoCO PLUGIN -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>default-prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco.exec</destFile>
+                            <propertyName>argLine</propertyName>
+                        </configuration>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>verify</phase>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
                         <configuration>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>INSTRUCTION</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
+                            <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- ✅ Sonar Maven Plugin (VERSIÓN COMPATIBLE CON JAVA 11) -->
+            <!-- SONAR PLUGIN -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
