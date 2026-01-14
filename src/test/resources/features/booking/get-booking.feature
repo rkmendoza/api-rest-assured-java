@@ -1,9 +1,13 @@
+@smoke
+@regression
 Feature: Get Booking API
   As an API user
   I want to retrieve booking details
   So that I can view reservation information
 
   @get-id
+  @crud
+  @positive
   Scenario: Get booking by ID
     Given I set base URL for RESTful Booker API
     And I set valid booking data
@@ -14,6 +18,8 @@ Feature: Get Booking API
     And response should contain booking details
 
   @get-all
+  @crud
+  @positive
   Scenario: Get all bookings
     Given I set base URL for RESTful Booker API
     When I send GET request to "/booking"

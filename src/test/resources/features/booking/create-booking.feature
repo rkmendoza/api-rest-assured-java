@@ -1,9 +1,12 @@
+@regression
 Feature: Create Booking API
   As an API user
   I want to create new bookings
   So that I can reserve rooms
 
   @create
+  @crud
+  @positive
   Scenario: Create new booking with valid data
     Given I set base URL for RESTful Booker API
     And I set valid booking data
@@ -15,6 +18,8 @@ Feature: Create Booking API
     And save booking ID from response
 
   @create
+  @crud
+  @positive
   Scenario: Create booking with specific names
     Given I set base URL for RESTful Booker API
     And I set booking data with firstname "Sofia" and lastname "Garcia"

@@ -1,9 +1,13 @@
+@regression
 Feature: Update Booking API
   As an API user
   I want to update existing bookings
   So that I can modify reservation details
 
   @update
+  @auth
+  @crud
+  @positive
   Scenario: Update booking with valid data
     Given I set base URL for RESTful Booker API
     And I set valid booking data

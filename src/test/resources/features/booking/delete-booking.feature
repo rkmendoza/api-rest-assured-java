@@ -1,9 +1,13 @@
+@regression
 Feature: Delete Booking API
   As an API user
   I want to delete bookings
   So that I can cancel reservations
 
   @delete
+  @auth
+  @crud
+  @positive
   Scenario: Delete existing booking
     Given I set base URL for RESTful Booker API
     And I set valid booking data
@@ -13,6 +17,9 @@ Feature: Delete Booking API
     Then response status code should be 201
 
   @delete
+  @auth
+  @crud
+  @negative
   Scenario: Verify booking is deleted
     Given I set base URL for RESTful Booker API
     And I set valid booking data
