@@ -115,7 +115,7 @@ jobs:
             target/site/jacoco/
             target/jacoco.exec
 
-  # -------------------- 5️⃣ Telegram Notifications --------------------
+  # -------------------- 5️⃣ Telegram Notifications ---------------------
 notify:
   runs-on: ubuntu-latest
   needs: [smoke, regression]
@@ -206,4 +206,5 @@ notify:
             -Dsonar.organization=rkmendoza \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+          # yamllint disable-line rule:new-line-at-end-of-file
             -Dsonar.coverage.exclusions=**/test/**,**/*Test.java,**/stepdefinitions/**,**/runners/**
