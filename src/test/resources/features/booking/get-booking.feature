@@ -16,6 +16,7 @@ Feature: Get Booking API
     When I send GET request to "/booking/{id}" with booking ID
     Then response status code should be 200
     And response should contain booking details
+    And response match whit the schema
 
   @get-all
   @crud

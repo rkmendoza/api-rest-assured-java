@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import models.Booking;
 import models.BookingResponse;
@@ -16,6 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Properties;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.*;
 
 public class BookingSteps {
@@ -185,5 +188,18 @@ public class BookingSteps {
     @And("put response should contain firstname {string}")
     public void putResponseShouldContainFirstname(String expectedFirsname) {
         assertEquals(bookingupdate.getFirstname(), expectedFirsname, "Firstname no coincide");
+    }
+
+    @And("response match whit the schema")
+    public void responseMatchWhitTheSchema() {
+        // ✅ Validación de JSON Schema directamente sobre el response body
+
+        //JsonPath jsonPath = new JsonPath(bookingResponse.getBooking().toString()); // bookingResponseRaw = String JSON del response
+        //System.out.println("JsonPath =============> " + jsonPath);
+
+        System.out.println("✅ Validación schema exitosa");
+
+        assertThat(response.jsonPath().prettyPrint(), matchesJsonSchemaInClasspath("schema/booking-schema.json"));
+        //throw new PendingException();
     }
 }
