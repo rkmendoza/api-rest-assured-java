@@ -11,7 +11,7 @@ Feature: Create Booking API
     Given I set base URL for RESTful Booker API
     And I set valid booking data
     When I send POST request to "/booking"
-    Then response status code should be 204
+    Then response status code should be 200
     And response should contain booking ID
     And response should contain booking details
     And response time should be less than 5000 milliseconds
