@@ -191,22 +191,22 @@ jobs:
           MESSAGE=$(cat <<EOF
           🚀 QA API Pipeline Results
 
-  Smoke_status: $SMOKE_STATUS
-  Regression_status: $REG_STATUS
+          Smoke_status: $SMOKE_STATUS
+          Regression_status: $REG_STATUS
 
-  Total Tests: $TOTAL_TESTS
-  Failed Tests: $FAILED_TESTS
+          Total Tests: $TOTAL_TESTS
+          Failed Tests: $FAILED_TESTS
 
-  📊 Allure Report:
-    $ALLURE_URL
-    EOF
-    )
+          📊 Allure Report:
+            $ALLURE_URL
+            EOF
+            )
 
-    echo "$MESSAGE"
+            echo "$MESSAGE"
 
-    curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
-    -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
-    -d text="$MESSAGE"
+            curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+            -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
+            -d text="$MESSAGE"
 
   # -------------------- 6️⃣ SonarCloud Analysis --------------------
   sonarcloud:
