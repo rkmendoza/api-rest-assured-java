@@ -164,6 +164,12 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
+      - name: Download Regression Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: regression-reports
+          path: artifacts
+
       - name: Calculate QA Metrics
         if: always()
         run: |
