@@ -173,7 +173,7 @@ jobs:
       - name: Calculate QA Metrics
         if: always()
         run: |
-          CUCUMBER_JSON="target/cucumber-reports/cucumber.json"
+          JSON="target/cucumber-reports/cucumber.json"
 
           if [ ! -f "$JSON" ]; then
           echo "❌ cucumber.json not found"
