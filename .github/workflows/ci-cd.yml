@@ -175,22 +175,29 @@ jobs:
         run: |
           CUCUMBER_JSON="target/cucumber-reports/cucumber.json"
 
-          if [ -f "$CUCUMBER_JSON" ]; then
-          TOTAL_TESTS=$(jq '[.[] | .elements[]
-          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
-          | select(.steps[].result.status=="passed")]
-          | length' $CUCUMBER_JSON)
-          FAILED_TESTS=$(jq '[.[] | .elements[]
-          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
-          | select(.steps[].result.status=="failed")]
-          | length' $CUCUMBER_JSON)
-          else
-            TOTAL_TESTS=0
-            FAILED_TESTS=0
+          if [ ! -f "$JSON" ]; then
+          echo "❌ cucumber.json not found"
+          exit 1
           fi
 
-          echo "TOTAL_TESTS=$TOTAL_TESTS" >> $GITHUB_ENV
-          echo "FAILED_TESTS=$FAILED_TESTS" >> $GITHUB_ENV
+          TOTAL=$(jq '[.[] | .elements[]
+          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
+          ] | length' "$JSON")
+
+          FAILED=$(jq '[.[] | .elements[]
+          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
+          | select(any(.steps[].result.status; .=="failed"))
+          ] | length' "$JSON")
+
+          PASSED=$(jq '[.[] | .elements[]
+          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
+          | select(all(.steps[].result.status; .=="passed"))
+          ] | length' "$JSON")
+
+          echo "📊 QA Metrics"
+          echo "Total  : $TOTAL"
+          echo "Passed : $PASSED"
+          echo "Failed : $FAILED"
 
       - name: Send Telegram Notification
         run: |
@@ -202,7 +209,9 @@ jobs:
           MESSAGE="QA API Pipeline Results:
           Smoke: $SMOKE_STATUS
           Regression: $REG_STATUS
-          Total Tests: $TOTAL_TESTS - Failed: $FAILED_TESTS
+          Total Tests: $TOTAL
+          Total Passed: $PASSED
+          Total Failed: $FAILED
           Allure Report: $ALLURE_URL"
 
           echo "$MESSAGE"
