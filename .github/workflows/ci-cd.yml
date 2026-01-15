@@ -178,6 +178,7 @@ jobs:
           if [ -f "$CUCUMBER_JSON" ]; then
           TOTAL_TESTS=$(jq '[.[] | .elements[]
           | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
+          | select(.steps[].result.status=="passed")]
           | length' $CUCUMBER_JSON)
           FAILED_TESTS=$(jq '[.[] | .elements[]
           | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
