@@ -176,9 +176,11 @@ jobs:
           CUCUMBER_JSON="target/cucumber-reports/cucumber.json"
 
           if [ -f "$CUCUMBER_JSON" ]; then
-          TOTAL_TESTS=$(jq '[.[] | .elements[] | select(.type=="scenario")]
+          TOTAL_TESTS=$(jq '[.[] | .elements[]
+          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
           | length' $CUCUMBER_JSON)
-          FAILED_TESTS=$(jq '[.[] | .elements[] | select(.type=="scenario")
+          FAILED_TESTS=$(jq '[.[] | .elements[]
+          | select(.keyword=="Scenario" or .keyword=="Scenario Outline")
           | select(.steps[].result.status=="failed")]
           | length' $CUCUMBER_JSON)
           else
