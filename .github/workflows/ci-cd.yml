@@ -170,6 +170,11 @@ jobs:
           name: regression-reports
           path: regression-artifacts
 
+      - name: Debug regression-artifacts
+        run: |
+          echo "Mostrando contenido de regression-artifacts:"
+          ls -R regression-artifacts
+
       - name: Calculate QA Metrics
         if: always()
         run: |
