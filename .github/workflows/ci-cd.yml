@@ -191,8 +191,8 @@ jobs:
           MESSAGE=$(cat <<EOF
           🚀 QA API Pipeline Results
 
-  Smoke: $SMOKE_STATUS
-  Regression: $REG_STATUS
+  Smoke_status: $SMOKE_STATUS
+  Regression_status: $REG_STATUS
 
   Total Tests: $TOTAL_TESTS
   Failed Tests: $FAILED_TESTS
