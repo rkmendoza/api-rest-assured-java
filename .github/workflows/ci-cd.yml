@@ -200,6 +200,10 @@ jobs:
           | select(all(.steps[].result.status; .=="passed"))
           ] | length' "$JSON")
 
+          echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+          echo "FAILED=$FAILED" >> $GITHUB_ENV
+          echo "PASSED=$PASSED" >> $GITHUB_ENV
+
           echo "📊 QA Metrics"
           echo "Total  : $TOTAL"
           echo "Passed : $PASSED"
