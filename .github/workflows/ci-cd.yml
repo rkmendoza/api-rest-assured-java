@@ -168,7 +168,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: regression-reports
-          path: regression-artifacts
+          path: |
+            target/cucumber-reports/cucumber.json
+            target/allure-report/
+            target/surefire-reports/
 
       - name: Debug regression-artifacts
         run: |
